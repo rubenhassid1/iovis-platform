@@ -1,11 +1,16 @@
 "use client";
 
 import Link from "next/link";
-import { Search, Globe, Menu, Music } from "lucide-react";
+import { Globe, Menu, Music } from "lucide-react";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
+
+  const isMusicians = pathname === "/" || pathname === "/search" || pathname.startsWith("/musicians");
+  const isEventPlanners = pathname === "/event-planners";
 
   return (
     <header className="sticky top-0 z-50 bg-white border-b border-gray-200">
@@ -19,15 +24,25 @@ export default function Navbar() {
 
           {/* Center nav tabs */}
           <nav className="hidden md:flex items-center gap-8">
-            <Link href="/" className="text-sm font-semibold text-foreground border-b-2 border-foreground pb-[26px] pt-[28px]">
+            <Link
+              href="/"
+              className={`text-sm font-semibold pb-[26px] pt-[28px] ${
+                isMusicians
+                  ? "text-foreground border-b-2 border-foreground"
+                  : "text-muted hover:text-foreground"
+              }`}
+            >
               Musicians
             </Link>
-            <Link href="/search" className="text-sm font-semibold text-muted hover:text-foreground pb-[26px] pt-[28px]">
-              Experiences
-            </Link>
-            <Link href="/search?type=private" className="text-sm font-semibold text-muted hover:text-foreground pb-[26px] pt-[28px] relative">
-              Private Events
-              <span className="absolute -top-1 -right-6 text-[10px] bg-primary text-white px-1.5 py-0.5 rounded-full font-bold">NEW</span>
+            <Link
+              href="/event-planners"
+              className={`text-sm font-semibold pb-[26px] pt-[28px] ${
+                isEventPlanners
+                  ? "text-foreground border-b-2 border-foreground"
+                  : "text-muted hover:text-foreground"
+              }`}
+            >
+              Event Planners
             </Link>
           </nav>
 
@@ -54,11 +69,10 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile menu dropdown */}
       {menuOpen && (
         <div className="absolute right-6 top-[72px] w-64 bg-white rounded-xl shadow-lg border border-gray-200 py-2 z-50">
-          <Link href="/search" className="block px-4 py-3 hover:bg-gray-100 text-sm font-semibold">Sign up</Link>
-          <Link href="/search" className="block px-4 py-3 hover:bg-gray-100 text-sm">Log in</Link>
+          <Link href="#" className="block px-4 py-3 hover:bg-gray-100 text-sm font-semibold">Sign up</Link>
+          <Link href="#" className="block px-4 py-3 hover:bg-gray-100 text-sm">Log in</Link>
           <div className="border-t border-gray-200 my-1"></div>
           <Link href="#" className="block px-4 py-3 hover:bg-gray-100 text-sm">List your talent</Link>
           <Link href="#" className="block px-4 py-3 hover:bg-gray-100 text-sm">Help Center</Link>

@@ -3,71 +3,59 @@
 import { Search } from "lucide-react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { eventTypes, cities } from "@/data/musicians";
 
-export default function SearchBar({ variant = "full" }: { variant?: "full" | "compact" }) {
+export default function SearchBar() {
   const router = useRouter();
-  const [where, setWhere] = useState("");
-  const [when, setWhen] = useState("");
-  const [who, setWho] = useState("");
+  const [eventType, setEventType] = useState("");
+  const [date, setDate] = useState("");
+  const [city, setCity] = useState("");
 
   const handleSearch = () => {
     const params = new URLSearchParams();
-    if (where) params.set("city", where);
-    if (when) params.set("date", when);
-    if (who) params.set("genre", who);
+    if (eventType) params.set("event", eventType);
+    if (date) params.set("date", date);
+    if (city) params.set("city", city);
     router.push(`/search?${params.toString()}`);
   };
-
-  if (variant === "compact") {
-    return (
-      <button
-        onClick={() => router.push("/search")}
-        className="flex items-center gap-3 border border-gray-300 rounded-full px-4 py-2 shadow-sm hover:shadow-md transition-shadow"
-      >
-        <Search className="w-4 h-4" />
-        <div className="text-sm">
-          <span className="font-semibold">Anywhere</span>
-          <span className="text-muted mx-1">·</span>
-          <span className="text-muted">Any week</span>
-          <span className="text-muted mx-1">·</span>
-          <span className="text-muted">Any genre</span>
-        </div>
-      </button>
-    );
-  }
 
   return (
     <div className="w-full max-w-[850px] mx-auto">
       <div className="flex items-center border border-gray-300 rounded-full shadow-sm hover:shadow-md transition-shadow bg-white">
         <div className="flex-1 px-6 py-3 border-r border-gray-200">
-          <label className="block text-xs font-bold">Where</label>
-          <input
-            type="text"
-            placeholder="Search cities"
-            className="w-full text-sm text-muted outline-none bg-transparent placeholder:text-muted"
-            value={where}
-            onChange={(e) => setWhere(e.target.value)}
-          />
+          <label className="block text-xs font-bold">Event Type</label>
+          <select
+            className="w-full text-sm text-muted outline-none bg-transparent"
+            value={eventType}
+            onChange={(e) => setEventType(e.target.value)}
+          >
+            <option value="">All events</option>
+            {eventTypes.map((et) => (
+              <option key={et} value={et}>{et}</option>
+            ))}
+          </select>
         </div>
         <div className="flex-1 px-6 py-3 border-r border-gray-200">
-          <label className="block text-xs font-bold">When</label>
+          <label className="block text-xs font-bold">Date</label>
           <input
-            type="text"
-            placeholder="Add dates"
-            className="w-full text-sm text-muted outline-none bg-transparent placeholder:text-muted"
-            value={when}
-            onChange={(e) => setWhen(e.target.value)}
+            type="date"
+            className="w-full text-sm text-muted outline-none bg-transparent"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
           />
         </div>
         <div className="flex-1 px-6 py-3">
-          <label className="block text-xs font-bold">Genre</label>
-          <input
-            type="text"
-            placeholder="Search genres"
-            className="w-full text-sm text-muted outline-none bg-transparent placeholder:text-muted"
-            value={who}
-            onChange={(e) => setWho(e.target.value)}
-          />
+          <label className="block text-xs font-bold">City</label>
+          <select
+            className="w-full text-sm text-muted outline-none bg-transparent"
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+          >
+            <option value="">All Israel</option>
+            {cities.map((c) => (
+              <option key={c} value={c}>{c}</option>
+            ))}
+          </select>
         </div>
         <button
           onClick={handleSearch}

@@ -1,3 +1,11 @@
+export interface Package {
+  name: string;
+  description: string;
+  duration: string;
+  price: number;
+  includes: string[];
+}
+
 export interface Musician {
   id: string;
   name: string;
@@ -8,26 +16,26 @@ export interface Musician {
   images: string[];
   rating: number;
   reviewCount: number;
-  pricePerHour: number;
   currency: string;
-  description: string;
-  longDescription: string;
+  bio: string;
+  longBio: string;
+  packages: Package[];
   highlights: { icon: string; title: string; description: string }[];
-  hostName: string;
-  hostImage: string;
-  hostTitle: string;
-  availableDates: { date: string; time: string; spotsLeft: number }[];
+  avatar: string;
+  experience: string;
+  languages: string[];
+  eventTypes: string[];
   reviews: { name: string; location: string; date: string; rating: number; text: string; avatar: string }[];
-  meetingPoint: string;
   tags: string[];
-  isFavorite?: boolean;
-  spotsLabel?: string;
+  verified?: boolean;
+  responseTime?: string;
+  bookingsCount?: number;
 }
 
 export const musicians: Musician[] = [
   {
     id: "1",
-    name: "Live Jazz Trio at a Hidden Rooftop Bar",
+    name: "Yoni Levy",
     type: "Jazz Trio",
     genre: "Jazz",
     city: "Tel Aviv",
@@ -41,41 +49,38 @@ export const musicians: Musician[] = [
     ],
     rating: 4.99,
     reviewCount: 2847,
-    pricePerHour: 258,
     currency: "₪",
-    description: "Experience an intimate jazz performance on a secret rooftop overlooking the Mediterranean.",
-    longDescription: "Step into a magical evening where live jazz fills the air on a hidden rooftop in the heart of Tel Aviv. Our trio — piano, double bass, and saxophone — will take you on a 2-hour journey through classic and contemporary jazz standards.\n\nEnjoy a curated selection of Israeli wines and artisan appetizers while the sun sets over the Mediterranean. This is more than a concert — it's an experience that combines world-class musicianship with Tel Aviv's vibrant nightlife culture.\n\nWhether you're a jazz aficionado or a curious newcomer, our intimate setting (max 20 guests) ensures a personal and unforgettable evening.",
+    bio: "Jazz trio led by Berklee-trained pianist Yoni Levy. We bring smooth, sophisticated jazz to any event — from intimate dinners to large corporate galas.",
+    longBio: "We're a three-piece jazz ensemble — piano, double bass, and saxophone — based in Tel Aviv. I founded the trio after studying at Berklee College of Music and performing across Europe and the US.\n\nOur repertoire spans classic standards (Coltrane, Miles Davis, Bill Evans) to contemporary jazz and original compositions. We tailor every setlist to your event, whether it's a relaxed cocktail hour, an elegant dinner, or a lively celebration.\n\nWe bring our own sound equipment for events up to 200 guests. For larger events, we work with your AV team. We're flexible, professional, and passionate about making your event unforgettable.",
+    packages: [
+      { name: "Cocktail Hour", description: "Smooth background jazz for cocktail receptions and networking events", duration: "2 hours", price: 3500, includes: ["Full trio (piano, bass, sax)", "Professional sound system", "Curated jazz setlist", "Smart formal attire"] },
+      { name: "Full Evening", description: "Complete musical coverage for dinners, galas, and celebrations", duration: "4 hours", price: 6000, includes: ["Full trio (piano, bass, sax)", "Professional sound system", "2 sets with break", "Custom setlist consultation", "Smart formal attire", "MC announcements if needed"] },
+      { name: "Ceremony + Reception", description: "From ceremony music through the reception — seamless coverage", duration: "6 hours", price: 8500, includes: ["Full trio (piano, bass, sax)", "Professional sound system", "Ceremony entrance & exit music", "Cocktail hour set", "Dinner set", "Custom setlist consultation"] },
+    ],
     highlights: [
-      { icon: "🎵", title: "Meet at the secret entrance", description: "A hidden door on Rothschild Boulevard leads to the rooftop venue." },
-      { icon: "🎹", title: "World-class musicians", description: "Our trio features graduates of the Berklee College of Music and Rimon School." },
-      { icon: "🍷", title: "Wine & appetizers included", description: "Enjoy Israeli wines paired with Mediterranean tapas throughout the performance." },
-      { icon: "🌅", title: "Sunset views", description: "Watch the sun set over the Mediterranean as the music plays." },
+      { icon: "🎹", title: "Berklee-trained musicians", description: "All three members are graduates of top music conservatories." },
+      { icon: "🔊", title: "Full sound system included", description: "We bring professional equipment — no extra AV costs for events up to 200 guests." },
+      { icon: "🎵", title: "Custom setlists", description: "We tailor every performance to your event's mood and audience." },
+      { icon: "⚡", title: "Fast setup", description: "We arrive 1 hour early and set up quietly — no disruption to your event." },
     ],
-    hostName: "Yoni",
-    hostImage: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop",
-    hostTitle: "Founder of Tel Aviv Jazz Collective",
-    availableDates: [
-      { date: "Tomorrow, March 19", time: "19:00 – 21:00", spotsLeft: 3 },
-      { date: "Tomorrow, March 19", time: "21:30 – 23:30", spotsLeft: 0 },
-      { date: "Friday, March 20", time: "19:00 – 21:00", spotsLeft: 1 },
-      { date: "Tuesday, March 24", time: "19:00 – 21:00", spotsLeft: 10 },
-      { date: "Thursday, March 26", time: "19:00 – 21:00", spotsLeft: 8 },
-    ],
+    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop",
+    experience: "12 years",
+    languages: ["Hebrew", "English"],
+    eventTypes: ["Weddings", "Corporate Events", "Private Parties", "Restaurant Nights", "Cocktail Hours"],
     reviews: [
-      { name: "Sarah", location: "New York, United States", date: "Today", rating: 5, text: "Absolutely magical evening! The jazz trio was incredible and the rooftop setting made it even more special. Yoni was a wonderful host.", avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop" },
-      { name: "David", location: "London, United Kingdom", date: "Today", rating: 5, text: "Best experience in Tel Aviv. The musicianship was world-class and the atmosphere was intimate and warm. Highly recommend!", avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop" },
-      { name: "Noa", location: "Tel Aviv, Israel", date: "1 day ago", rating: 5, text: "I've been to many jazz shows but this rooftop experience is truly unique. The wine pairing was perfect.", avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop" },
-      { name: "Michael", location: "Berlin, Germany", date: "1 day ago", rating: 5, text: "A hidden gem! The musicians are top-tier and the view is breathtaking. Will definitely come back.", avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop" },
-      { name: "Amit", location: "Haifa, Israel", date: "3 days ago", rating: 5, text: "Great host and an incredible musical experience!", avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop" },
-      { name: "Rachel", location: "Los Angeles, United States", date: "5 days ago", rating: 5, text: "We loved the jazz trio so much that we came back the next night. The saxophonist is extraordinarily talented.", avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100&h=100&fit=crop" },
+      { name: "Sarah M.", location: "Event Planner, Tel Aviv", date: "1 week ago", rating: 5, text: "Booked Yoni's trio for a corporate gala at the Hilton. They were incredible — professional, punctual, and the music was perfect for the atmosphere. Multiple guests asked me for their contact info.", avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop" },
+      { name: "David K.", location: "Wedding Planner, Jerusalem", date: "2 weeks ago", rating: 5, text: "Used them for a wedding ceremony and reception. Seamless transitions, beautiful music. The bride was in tears during the entrance. Highly recommend.", avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop" },
+      { name: "Noa R.", location: "Corporate Events, Tel Aviv", date: "3 weeks ago", rating: 5, text: "Third time booking this trio. They never disappoint. Perfect for sophisticated client dinners.", avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop" },
+      { name: "Michael B.", location: "Private Client, Herzliya", date: "1 month ago", rating: 5, text: "Hired them for my wife's birthday. The custom setlist included all her favorite songs. Absolutely magical evening.", avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop" },
     ],
-    meetingPoint: "Secret entrance, Rothschild Boulevard 42, Tel Aviv",
-    tags: ["Jazz", "Live Music", "Rooftop"],
-    spotsLabel: "3 spots left",
+    tags: ["Jazz", "Trio", "Corporate", "Weddings"],
+    verified: true,
+    responseTime: "Within 1 hour",
+    bookingsCount: 340,
   },
   {
     id: "2",
-    name: "Classical Guitar Sunset Session by the Sea",
+    name: "Daniel Ashkenazi",
     type: "Classical Guitarist",
     genre: "Classical",
     city: "Tel Aviv",
@@ -87,32 +92,35 @@ export const musicians: Musician[] = [
     ],
     rating: 4.94,
     reviewCount: 1203,
-    pricePerHour: 180,
     currency: "₪",
-    description: "A solo classical guitar performance on the Jaffa shore as the sun goes down.",
-    longDescription: "Join acclaimed guitarist Daniel for a serene hour of classical guitar on the ancient shores of Jaffa. As the Mediterranean waves lap against the rocks and the sun paints the sky, experience Bach, Rodrigo, and original compositions in an unforgettable seaside setting.",
+    bio: "Award-winning classical guitarist available for weddings, ceremonies, and intimate events. Elegant, refined music for your most important moments.",
+    longBio: "I'm a concert guitarist and composer based in Tel Aviv, with over 15 years of performance experience at international festivals, concert halls, and private events across Europe and the Middle East.\n\nMy repertoire includes Bach, Rodrigo, Albéniz, Barrios, and original compositions. I specialize in creating the perfect musical atmosphere for wedding ceremonies, cocktail hours, and intimate gatherings.\n\nI perform solo or as a duo with a flutist or violinist. I bring my own amplification for outdoor events.",
+    packages: [
+      { name: "Ceremony", description: "Beautiful classical guitar for your wedding or event ceremony", duration: "1 hour", price: 1800, includes: ["Solo classical guitar", "Processional & recessional music", "Pre-ceremony background music", "Portable amplification"] },
+      { name: "Cocktail & Dinner", description: "Elegant background music for receptions and dinners", duration: "3 hours", price: 3200, includes: ["Solo classical guitar", "Curated repertoire", "Portable amplification", "2 sets with break"] },
+      { name: "Duo Performance", description: "Guitar + flute or violin for a richer sound", duration: "3 hours", price: 4800, includes: ["Classical guitar + flute or violin", "Curated repertoire", "Professional sound", "2 sets with break", "Custom song requests"] },
+    ],
     highlights: [
-      { icon: "🎸", title: "Award-winning guitarist", description: "Daniel has performed at international festivals across Europe and the Middle East." },
-      { icon: "🌊", title: "Seaside ambiance", description: "Listen to classical masterpieces with the Mediterranean as your backdrop." },
+      { icon: "🎸", title: "International performer", description: "Performed at festivals in Spain, France, Germany, and across the Middle East." },
+      { icon: "🎼", title: "Versatile repertoire", description: "From Bach to Bossa Nova — music tailored to your event's style." },
+      { icon: "🤵", title: "Elegant presentation", description: "Professional attire and demeanor for formal occasions." },
     ],
-    hostName: "Daniel",
-    hostImage: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&h=200&fit=crop",
-    hostTitle: "Concert Guitarist & Composer",
-    availableDates: [
-      { date: "Tomorrow, March 19", time: "17:00 – 18:30", spotsLeft: 5 },
-      { date: "Saturday, March 22", time: "17:00 – 18:30", spotsLeft: 8 },
-    ],
+    avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&h=200&fit=crop",
+    experience: "15 years",
+    languages: ["Hebrew", "English", "Spanish"],
+    eventTypes: ["Weddings", "Ceremonies", "Private Dinners", "Corporate Events", "Art Exhibitions"],
     reviews: [
-      { name: "Elena", location: "Rome, Italy", date: "2 days ago", rating: 5, text: "One of the most peaceful and beautiful experiences of my trip. Daniel is a virtuoso.", avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop" },
+      { name: "Elena S.", location: "Wedding Planner, Herzliya", date: "5 days ago", rating: 5, text: "Daniel played at a beachfront wedding ceremony. His music was breathtaking — every guest commented on it. He's our go-to guitarist now.", avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop" },
     ],
-    meetingPoint: "Jaffa Port, Old Jaffa, Tel Aviv",
-    tags: ["Classical", "Guitar", "Seaside"],
-    spotsLabel: "5 spots left",
+    tags: ["Classical", "Guitar", "Weddings", "Ceremonies"],
+    verified: true,
+    responseTime: "Within 2 hours",
+    bookingsCount: 215,
   },
   {
     id: "3",
-    name: "Middle Eastern Oud & Percussion Night",
-    type: "Oud Player & Percussionist",
+    name: "Sami & Khalil",
+    type: "Oud & Percussion Duo",
     genre: "Middle Eastern",
     city: "Jerusalem",
     image: "https://images.unsplash.com/photo-1504898770365-14faca6a7320?w=800&h=600&fit=crop",
@@ -123,34 +131,35 @@ export const musicians: Musician[] = [
     ],
     rating: 4.97,
     reviewCount: 892,
-    pricePerHour: 220,
     currency: "₪",
-    description: "An enchanting evening of oud and darbuka music in a centuries-old stone courtyard.",
-    longDescription: "Discover the soul of the Middle East through the mesmerizing sounds of the oud and darbuka percussion. Set in a beautiful stone courtyard in the Old City of Jerusalem, this intimate gathering brings together the ancient and the contemporary.\n\nMaster oud player Sami and percussionist Khalil will guide you through traditional maqam scales, Sufi-inspired improvisations, and rhythmic journeys that have been passed down through generations. Tea and traditional sweets are served.",
+    bio: "Master oud player and percussionist bringing the rich sounds of Middle Eastern music to weddings, cultural events, and celebrations.",
+    longBio: "We are Sami (oud) and Khalil (darbuka & riq), a duo rooted in the rich musical traditions of the Middle East. Together, we've been performing for over 20 years at weddings, festivals, corporate events, and cultural gatherings.\n\nOur music blends traditional maqam scales with contemporary arrangements. We're equally at home at an elegant reception as we are at a lively celebration with dancing.\n\nWe can expand to a full ensemble (adding violin, qanun, and vocals) for larger events.",
+    packages: [
+      { name: "Duo Set", description: "Intimate oud and percussion performance", duration: "2 hours", price: 2800, includes: ["Oud + percussion duo", "Traditional & contemporary repertoire", "Sound system for up to 100 guests"] },
+      { name: "Full Ensemble", description: "Expanded group with violin, qanun, and vocals", duration: "3 hours", price: 5500, includes: ["5-piece ensemble", "Full Middle Eastern repertoire", "Professional sound system", "Dance sets available", "Custom song requests"] },
+      { name: "Wedding Package", description: "Complete musical coverage for Middle Eastern weddings", duration: "5 hours", price: 8000, includes: ["5-piece ensemble", "Ceremony music", "Reception & dinner music", "Dabke dance sets", "Professional sound & lighting", "MC services in Hebrew, Arabic & English"] },
+    ],
     highlights: [
-      { icon: "🏛️", title: "Historic setting", description: "Perform in a courtyard that's been hosting music for centuries." },
-      { icon: "🎶", title: "Traditional instruments", description: "Experience the oud and darbuka — instruments with thousands of years of history." },
-      { icon: "🍵", title: "Tea & sweets", description: "Enjoy traditional Middle Eastern tea and sweets during the performance." },
+      { icon: "🎶", title: "20+ years together", description: "A duo with decades of experience performing at hundreds of events." },
+      { icon: "🌍", title: "Multilingual", description: "We perform in Arabic, Hebrew, and English — perfect for multicultural events." },
+      { icon: "💃", title: "Dance-ready", description: "High-energy dabke and celebration sets to get everyone on their feet." },
     ],
-    hostName: "Sami",
-    hostImage: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&h=200&fit=crop",
-    hostTitle: "Master Oud Player & Cultural Guide",
-    availableDates: [
-      { date: "Tomorrow, March 19", time: "20:00 – 22:00", spotsLeft: 2 },
-      { date: "Sunday, March 23", time: "20:00 – 22:00", spotsLeft: 7 },
-      { date: "Wednesday, March 26", time: "20:00 – 22:00", spotsLeft: 10 },
-    ],
+    avatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&h=200&fit=crop",
+    experience: "20 years",
+    languages: ["Arabic", "Hebrew", "English"],
+    eventTypes: ["Weddings", "Cultural Events", "Corporate Events", "Festivals", "Private Celebrations"],
     reviews: [
-      { name: "Thomas", location: "Paris, France", date: "3 days ago", rating: 5, text: "An absolutely transcendent experience. The music, the setting, the hospitality — everything was perfect.", avatar: "https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?w=100&h=100&fit=crop" },
-      { name: "Maya", location: "Jerusalem, Israel", date: "1 week ago", rating: 5, text: "Sami is a master of his craft. I've brought friends here three times now and each visit is unique.", avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop" },
+      { name: "Thomas L.", location: "Event Manager, Jerusalem", date: "1 week ago", rating: 5, text: "Booked Sami & Khalil for a multicultural corporate event. They read the room perfectly and had everyone engaged. Truly masterful.", avatar: "https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?w=100&h=100&fit=crop" },
+      { name: "Maya D.", location: "Wedding Planner, Jerusalem", date: "2 weeks ago", rating: 5, text: "They made our client's wedding unforgettable. The dabke set had 200 people dancing. We've already booked them for three more events.", avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop" },
     ],
-    meetingPoint: "Armenian Quarter, Old City, Jerusalem",
-    tags: ["Middle Eastern", "Oud", "Cultural"],
-    spotsLabel: "2 spots left",
+    tags: ["Middle Eastern", "Oud", "Weddings", "Cultural"],
+    verified: true,
+    responseTime: "Within 3 hours",
+    bookingsCount: 280,
   },
   {
     id: "4",
-    name: "Electronic Music Production Workshop",
+    name: "DJ Nir",
     type: "DJ & Producer",
     genre: "Electronic",
     city: "Tel Aviv",
@@ -161,34 +170,37 @@ export const musicians: Musician[] = [
     ],
     rating: 4.86,
     reviewCount: 456,
-    pricePerHour: 350,
     currency: "₪",
-    description: "Learn the art of electronic music production from a top Tel Aviv DJ in a professional studio.",
-    longDescription: "Dive into the world of electronic music production with one of Tel Aviv's most recognized DJs and producers. In this hands-on 3-hour workshop, you'll learn the fundamentals of creating electronic music — from sound design to arrangement to mixing.\n\nThe session takes place in a fully equipped professional studio in south Tel Aviv's creative district. No prior experience needed.",
+    bio: "Top Tel Aviv DJ for corporate events, parties, weddings, and brand launches. High-energy sets tailored to your crowd.",
+    longBio: "I've been DJing professionally for 10 years, working the Tel Aviv club scene and private event circuit. I specialize in reading the room and creating the perfect energy for every moment — from chill lounge vibes to peak-hour dance floor madness.\n\nI bring my own professional DJ setup including Pioneer CDJs, mixer, and speakers for events up to 300 guests. For larger events, I work with your production team.\n\nGenres: house, techno, disco, funk, pop, hip-hop, Israeli hits — whatever your event needs.",
+    packages: [
+      { name: "Party Set", description: "High-energy DJ set for parties and celebrations", duration: "4 hours", price: 3500, includes: ["Professional DJ set", "Pioneer CDJ/mixer setup", "Speakers for up to 150 guests", "LED lighting", "Custom playlist consultation"] },
+      { name: "Full Night", description: "Complete DJ coverage from cocktails to last dance", duration: "6 hours", price: 5000, includes: ["Professional DJ set", "Full sound system for up to 300 guests", "LED lighting package", "Background music during dinner", "Dance floor sets", "Custom playlist consultation"] },
+      { name: "Premium Package", description: "DJ + live percussion or saxophone for an elevated experience", duration: "5 hours", price: 7000, includes: ["DJ + live musician", "Full sound & lighting", "Background & dance sets", "Custom playlist", "Event coordination"] },
+    ],
     highlights: [
-      { icon: "🎧", title: "Professional studio", description: "Work with industry-standard equipment in a real production studio." },
-      { icon: "💻", title: "Hands-on learning", description: "Create your own track during the workshop and take it home." },
+      { icon: "🎧", title: "10 years experience", description: "Hundreds of events from intimate parties to festivals." },
+      { icon: "🔊", title: "Full production", description: "Sound, lighting, and DJ equipment included in every package." },
+      { icon: "🎤", title: "Add live musicians", description: "Pair with a live saxophonist, percussionist, or vocalist." },
     ],
-    hostName: "Nir",
-    hostImage: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=200&h=200&fit=crop",
-    hostTitle: "DJ, Producer & Music Educator",
-    availableDates: [
-      { date: "Friday, March 20", time: "14:00 – 17:00", spotsLeft: 4 },
-      { date: "Monday, March 23", time: "14:00 – 17:00", spotsLeft: 6 },
-    ],
+    avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=200&h=200&fit=crop",
+    experience: "10 years",
+    languages: ["Hebrew", "English"],
+    eventTypes: ["Parties", "Weddings", "Corporate Events", "Brand Launches", "Club Nights"],
     reviews: [
-      { name: "Alex", location: "Amsterdam, Netherlands", date: "1 week ago", rating: 5, text: "Amazing workshop! Nir is patient and knowledgeable. I left with a track I'm actually proud of.", avatar: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=100&h=100&fit=crop" },
+      { name: "Alex V.", location: "Event Planner, Tel Aviv", date: "2 weeks ago", rating: 5, text: "DJ Nir crushed it at our product launch. Perfect energy, perfect song selection. Clients were dancing until midnight.", avatar: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=100&h=100&fit=crop" },
     ],
-    meetingPoint: "Studio 12, Florentin, Tel Aviv",
-    tags: ["Electronic", "Workshop", "Production"],
-    spotsLabel: "4 spots left",
+    tags: ["DJ", "Electronic", "Parties", "Weddings"],
+    verified: true,
+    responseTime: "Within 1 hour",
+    bookingsCount: 420,
   },
   {
     id: "5",
-    name: "Acoustic Folk & Stories by the Galilee",
+    name: "Tamar Golan",
     type: "Singer-Songwriter",
-    genre: "Folk",
-    city: "Tiberias",
+    genre: "Folk / Pop",
+    city: "Tel Aviv",
     image: "https://images.unsplash.com/photo-1525201548942-d8732f6617a0?w=800&h=600&fit=crop",
     images: [
       "https://images.unsplash.com/photo-1525201548942-d8732f6617a0?w=800&h=600&fit=crop",
@@ -196,30 +208,33 @@ export const musicians: Musician[] = [
     ],
     rating: 4.92,
     reviewCount: 634,
-    pricePerHour: 150,
     currency: "₪",
-    description: "Intimate folk songs and storytelling by the shores of the Sea of Galilee.",
-    longDescription: "Join singer-songwriter Tamar for an evening of original folk music and stories inspired by the landscapes and legends of the Galilee. The performance takes place on a wooden deck overlooking the Sea of Galilee, under a canopy of stars.\n\nTamar weaves Hebrew and English lyrics with fingerpicked guitar, creating an atmosphere that feels both ancient and modern. Herbal tea and homemade cookies are served.",
+    bio: "Acoustic singer-songwriter for intimate events, weddings, and private celebrations. Warm vocals, guitar, and heartfelt performances.",
+    longBio: "I'm Tamar — a singer-songwriter based in Tel Aviv with a repertoire that spans folk, pop, and Israeli classics. I perform with acoustic guitar and vocals, creating an intimate and personal atmosphere perfect for weddings, private dinners, and small celebrations.\n\nI love learning special songs for events — whether it's a couple's first-dance song or a meaningful family melody. Music should tell your story.",
+    packages: [
+      { name: "Acoustic Set", description: "Solo voice and guitar for intimate gatherings", duration: "2 hours", price: 2000, includes: ["Solo performance (voice + guitar)", "Portable amplification", "Custom song requests", "2 sets with break"] },
+      { name: "Wedding Ceremony", description: "Ceremony music including processional and special songs", duration: "1.5 hours", price: 2500, includes: ["Solo performance", "Processional & recessional", "Up to 2 custom songs learned for your event", "Pre-ceremony background music", "Sound system"] },
+      { name: "Full Wedding", description: "Ceremony through dinner — complete acoustic coverage", duration: "5 hours", price: 5500, includes: ["Solo or duo (add pianist)", "Ceremony music", "Cocktail hour", "Dinner background music", "Up to 3 custom songs", "Full sound system"] },
+    ],
     highlights: [
-      { icon: "🌟", title: "Under the stars", description: "An open-air performance under the Galilee night sky." },
-      { icon: "📖", title: "Stories & songs", description: "Each song comes with the story behind it — from Galilee legends to personal journeys." },
+      { icon: "🎤", title: "Personal touch", description: "I learn special songs for your event — your story, your music." },
+      { icon: "🎸", title: "Acoustic warmth", description: "Intimate, unplugged sound perfect for emotional moments." },
     ],
-    hostName: "Tamar",
-    hostImage: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=200&h=200&fit=crop",
-    hostTitle: "Singer-Songwriter & Storyteller",
-    availableDates: [
-      { date: "Saturday, March 22", time: "20:00 – 21:30", spotsLeft: 6 },
-      { date: "Saturday, March 29", time: "20:00 – 21:30", spotsLeft: 10 },
-    ],
+    avatar: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=200&h=200&fit=crop",
+    experience: "8 years",
+    languages: ["Hebrew", "English"],
+    eventTypes: ["Weddings", "Private Dinners", "Ceremonies", "Birthday Parties", "Proposals"],
     reviews: [
-      { name: "Jonathan", location: "Haifa, Israel", date: "5 days ago", rating: 5, text: "Tamar's voice and stories are captivating. A truly special evening by the lake.", avatar: "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=100&h=100&fit=crop" },
+      { name: "Jonathan R.", location: "Groom, Haifa", date: "1 week ago", rating: 5, text: "Tamar learned our first-dance song and performed it beautifully. There wasn't a dry eye in the room. She made our wedding truly special.", avatar: "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=100&h=100&fit=crop" },
     ],
-    meetingPoint: "Lakeside Deck, Tiberias Promenade",
-    tags: ["Folk", "Acoustic", "Storytelling"],
+    tags: ["Acoustic", "Singer", "Weddings", "Folk"],
+    verified: true,
+    responseTime: "Within 2 hours",
+    bookingsCount: 180,
   },
   {
     id: "6",
-    name: "Klezmer Band: A Journey Through Eastern Europe",
+    name: "Moshe & The Klezmorim",
     type: "Klezmer Band",
     genre: "Klezmer",
     city: "Jerusalem",
@@ -230,63 +245,68 @@ export const musicians: Musician[] = [
     ],
     rating: 4.88,
     reviewCount: 567,
-    pricePerHour: 280,
     currency: "₪",
-    description: "An energetic klezmer performance in a historic Jerusalem venue with dancing and refreshments.",
-    longDescription: "Experience the joy and soul of klezmer music with a six-piece band performing in a beautiful stone-walled hall in Jerusalem's Nachlaot neighborhood. From haunting melodies to exuberant dance tunes, this 2-hour show takes you on a musical journey through Eastern European Jewish culture.\n\nDancing is encouraged! Light refreshments and drinks are included.",
+    bio: "Six-piece klezmer band for Jewish weddings, bar/bat mitzvahs, and cultural celebrations. High-energy, joyful, and unforgettable.",
+    longBio: "We're a six-piece klezmer ensemble — violin, clarinet, accordion, bass, drums, and vocals — dedicated to bringing the joy and soul of Eastern European Jewish music to celebrations across Israel.\n\nFrom the haunting melodies of the hora to the exuberant energy of the freylekhs, our music gets everyone — from grandparents to grandchildren — dancing together.\n\nWe also perform Israeli classics, Mizrachi hits, and modern celebration music. We're the complete musical package for Jewish celebrations.",
+    packages: [
+      { name: "Simcha Set", description: "High-energy klezmer for celebrations and parties", duration: "3 hours", price: 5000, includes: ["6-piece klezmer band", "Professional sound system", "Hora & freylekhs sets", "Israeli & Mizrachi hits", "Dance-floor focused"] },
+      { name: "Wedding Package", description: "Full wedding coverage with ceremony, dinner & celebration", duration: "5 hours", price: 8500, includes: ["6-piece klezmer band", "Chuppah ceremony music", "Cocktail hour", "Dinner background music", "Hora & celebration sets", "Full sound system", "Wireless microphone for speeches"] },
+    ],
     highlights: [
       { icon: "🎻", title: "Six-piece ensemble", description: "Violin, clarinet, accordion, bass, drums, and vocals." },
-      { icon: "💃", title: "Dancing welcome", description: "The music will move you — literally. Dancing is part of the experience!" },
+      { icon: "💃", title: "Everyone dances", description: "Our hora sets are legendary — we guarantee a packed dance floor." },
     ],
-    hostName: "Moshe",
-    hostImage: "https://images.unsplash.com/photo-1463453091185-61582044d556?w=200&h=200&fit=crop",
-    hostTitle: "Klezmer Bandleader & Violinist",
-    availableDates: [
-      { date: "Thursday, March 20", time: "20:00 – 22:00", spotsLeft: 12 },
-      { date: "Thursday, March 27", time: "20:00 – 22:00", spotsLeft: 15 },
-    ],
+    avatar: "https://images.unsplash.com/photo-1463453091185-61582044d556?w=200&h=200&fit=crop",
+    experience: "18 years",
+    languages: ["Hebrew", "Yiddish", "English"],
+    eventTypes: ["Jewish Weddings", "Bar/Bat Mitzvahs", "Holiday Celebrations", "Cultural Events"],
     reviews: [
-      { name: "Rebecca", location: "Chicago, United States", date: "3 days ago", rating: 5, text: "What an incredible night! The music had everyone on their feet dancing. Moshe and the band are phenomenal.", avatar: "https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?w=100&h=100&fit=crop" },
+      { name: "Rebecca G.", location: "Wedding Planner, Jerusalem", date: "1 week ago", rating: 5, text: "The hora went on for 40 minutes because nobody wanted to stop! Moshe and his band are the gold standard for Jewish celebrations.", avatar: "https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?w=100&h=100&fit=crop" },
     ],
-    meetingPoint: "Nachlaot Community Hall, Jerusalem",
-    tags: ["Klezmer", "Band", "Dancing"],
+    tags: ["Klezmer", "Jewish Weddings", "Band", "Celebrations"],
+    verified: true,
+    responseTime: "Within 4 hours",
+    bookingsCount: 310,
   },
   {
     id: "7",
-    name: "Flamenco Guitar Under the Desert Stars",
+    name: "Carlos Fuentes",
     type: "Flamenco Guitarist",
     genre: "Flamenco",
-    city: "Eilat",
-    image: "https://images.unsplash.com/photo-1509423350716-97f9360b4e09?w=800&h=600&fit=crop",
+    city: "Tel Aviv",
+    image: "https://images.unsplash.com/photo-1460723237483-7a6dc9d0b212?w=800&h=600&fit=crop",
     images: [
-      "https://images.unsplash.com/photo-1509423350716-97f9360b4e09?w=800&h=600&fit=crop",
-      "https://images.unsplash.com/photo-1509423350716-97f9360b4e09?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1460723237483-7a6dc9d0b212?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1460723237483-7a6dc9d0b212?w=800&h=600&fit=crop",
     ],
     rating: 4.95,
     reviewCount: 389,
-    pricePerHour: 200,
     currency: "₪",
-    description: "A passionate flamenco guitar performance in the heart of the Negev desert near Eilat.",
-    longDescription: "Under a blanket of stars in the Negev desert, experience the fire and passion of flamenco guitar. Guitarist Carlos brings the spirit of Andalusia to the desert, performing traditional flamenco alongside original compositions inspired by the Israeli landscape.",
+    bio: "Passionate flamenco guitarist for elegant events, wine tastings, Mediterranean-themed parties, and intimate dinners.",
+    longBio: "Born in Seville and based in Tel Aviv, I bring authentic flamenco guitar to events across Israel. My performances range from quiet, atmospheric background music to fiery, show-stopping solos.\n\nI can perform solo or with a flamenco dancer and cajón player for a full flamenco show. Perfect for Mediterranean-themed events, wine dinners, corporate receptions, and restaurant ambiance.",
+    packages: [
+      { name: "Solo Guitar", description: "Atmospheric flamenco guitar for elegant events", duration: "2 hours", price: 2200, includes: ["Solo flamenco guitar", "Background & feature sets", "Portable amplification"] },
+      { name: "Flamenco Show", description: "Guitar + dancer + percussion — a full flamenco experience", duration: "1.5 hours", price: 5500, includes: ["Flamenco guitar", "Professional dancer", "Cajón percussion", "Choreographed show", "Sound system", "2 show sets"] },
+    ],
     highlights: [
-      { icon: "🌵", title: "Desert setting", description: "An open-air stage in the stunning Negev desert." },
-      { icon: "🔥", title: "Passionate performance", description: "Feel the intensity and emotion of authentic flamenco guitar." },
+      { icon: "🔥", title: "Authentic Andalusian", description: "Born and trained in Seville — the home of flamenco." },
+      { icon: "💃", title: "Add a dancer", description: "Elevate the experience with a professional flamenco dancer." },
     ],
-    hostName: "Carlos",
-    hostImage: "https://images.unsplash.com/photo-1556157382-97eda2d62296?w=200&h=200&fit=crop",
-    hostTitle: "Flamenco Guitarist",
-    availableDates: [
-      { date: "Friday, March 20", time: "20:30 – 22:00", spotsLeft: 8 },
-    ],
+    avatar: "https://images.unsplash.com/photo-1556157382-97eda2d62296?w=200&h=200&fit=crop",
+    experience: "14 years",
+    languages: ["Spanish", "Hebrew", "English"],
+    eventTypes: ["Corporate Events", "Wine Dinners", "Private Parties", "Restaurant Events", "Themed Nights"],
     reviews: [
-      { name: "Sofia", location: "Madrid, Spain", date: "1 week ago", rating: 5, text: "As a Spaniard, I was skeptical about flamenco in the desert. Carlos proved me wrong — it was breathtaking.", avatar: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=100&h=100&fit=crop" },
+      { name: "Sofia L.", location: "Event Manager, Herzliya", date: "2 weeks ago", rating: 5, text: "Carlos and his dancer performed at our company's Mediterranean-themed dinner. It was the highlight of the evening — guests couldn't stop talking about it.", avatar: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=100&h=100&fit=crop" },
     ],
-    meetingPoint: "Desert Stage, 20 min north of Eilat",
-    tags: ["Flamenco", "Guitar", "Desert"],
+    tags: ["Flamenco", "Guitar", "Shows", "Mediterranean"],
+    verified: true,
+    responseTime: "Within 3 hours",
+    bookingsCount: 165,
   },
   {
     id: "8",
-    name: "Piano Recital in a Historic Haifa Mansion",
+    name: "Lena Petrova",
     type: "Concert Pianist",
     genre: "Classical",
     city: "Haifa",
@@ -297,33 +317,34 @@ export const musicians: Musician[] = [
     ],
     rating: 4.91,
     reviewCount: 723,
-    pricePerHour: 190,
     currency: "₪",
-    description: "An intimate piano recital in a beautifully restored Ottoman-era mansion on Mount Carmel.",
-    longDescription: "Experience classical piano at its finest in an intimate setting — a lovingly restored Ottoman mansion perched on Mount Carmel with panoramic views of Haifa Bay. Pianist Lena performs works by Chopin, Debussy, and Israeli composers in a salon that seats just 15 guests.\n\nWine and cheese are served in the garden before the performance.",
+    bio: "Concert pianist for upscale events, galas, and ceremonies. Elegant classical and jazz piano for venues with a piano or digital keyboard.",
+    longBio: "I'm a classically trained concert pianist who has performed at venues across Europe and Israel. I specialize in creating elegant, sophisticated atmospheres for high-end events.\n\nMy repertoire includes classical (Chopin, Debussy, Rachmaninoff), jazz standards, film scores, and popular arrangements. I perform on your venue's piano or bring a high-quality digital piano.\n\nIdeal for hotel lobbies, corporate galas, cocktail receptions, wedding ceremonies, and art gallery openings.",
+    packages: [
+      { name: "Cocktail Piano", description: "Elegant piano for receptions and cocktail hours", duration: "2 hours", price: 2500, includes: ["Solo piano performance", "Classical & jazz repertoire", "Digital piano if needed", "Formal attire"] },
+      { name: "Gala Evening", description: "Full-evening piano for galas and formal dinners", duration: "4 hours", price: 4000, includes: ["Solo piano", "Custom repertoire", "Digital piano if needed", "3 sets with breaks", "Formal attire"] },
+    ],
     highlights: [
-      { icon: "🏠", title: "Historic venue", description: "A stunning Ottoman-era mansion with original stone walls and arched windows." },
-      { icon: "🎹", title: "World-class pianist", description: "Lena has performed at concert halls across Europe and Israel." },
+      { icon: "🎹", title: "Concert-hall quality", description: "Performances that rival the Philharmonic — at your event." },
+      { icon: "🏨", title: "Brings her own piano", description: "High-quality digital piano available if your venue doesn't have one." },
     ],
-    hostName: "Lena",
-    hostImage: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&h=200&fit=crop",
-    hostTitle: "Concert Pianist",
-    availableDates: [
-      { date: "Sunday, March 22", time: "18:00 – 19:30", spotsLeft: 3 },
-      { date: "Sunday, March 29", time: "18:00 – 19:30", spotsLeft: 7 },
-    ],
+    avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&h=200&fit=crop",
+    experience: "16 years",
+    languages: ["Hebrew", "English", "Russian"],
+    eventTypes: ["Corporate Galas", "Hotel Events", "Wedding Ceremonies", "Art Exhibitions", "Cocktail Receptions"],
     reviews: [
-      { name: "Anna", location: "Vienna, Austria", date: "4 days ago", rating: 5, text: "Lena's Chopin was magnificent. The mansion setting was like stepping back in time. A must-do in Haifa.", avatar: "https://images.unsplash.com/photo-1541823709867-1b206113eafd?w=100&h=100&fit=crop" },
+      { name: "Anna T.", location: "Hotel Event Manager, Haifa", date: "1 week ago", rating: 5, text: "Lena has been our resident pianist for VIP events for the past year. Every performance is flawless. She elevates the entire atmosphere.", avatar: "https://images.unsplash.com/photo-1541823709867-1b206113eafd?w=100&h=100&fit=crop" },
     ],
-    meetingPoint: "Ottoman Mansion, Mount Carmel, Haifa",
-    tags: ["Classical", "Piano", "Historic"],
-    spotsLabel: "3 spots left",
+    tags: ["Classical", "Piano", "Galas", "Upscale"],
+    verified: true,
+    responseTime: "Within 2 hours",
+    bookingsCount: 290,
   },
   {
     id: "9",
-    name: "Reggae & Drum Circle on the Beach",
-    type: "Reggae Band",
-    genre: "Reggae",
+    name: "Avi & The Groove",
+    type: "Cover Band",
+    genre: "Pop / Rock",
     city: "Tel Aviv",
     image: "https://images.unsplash.com/photo-1506157786151-b8491531f063?w=800&h=600&fit=crop",
     images: [
@@ -332,33 +353,37 @@ export const musicians: Musician[] = [
     ],
     rating: 4.82,
     reviewCount: 1045,
-    pricePerHour: 120,
     currency: "₪",
-    description: "Join a reggae band and drum circle right on the Tel Aviv beach at sunset.",
-    longDescription: "Feel the rhythm of Tel Aviv with this unique beach reggae experience. A live reggae band sets the vibe as the sun goes down, and everyone is invited to join the drum circle. Drums and percussion instruments are provided — no experience needed.\n\nThis communal music experience captures the free-spirited energy of Tel Aviv's beach culture.",
+    bio: "High-energy 5-piece cover band playing pop, rock, funk, and Israeli hits. The ultimate party band for events that need a packed dance floor.",
+    longBio: "We're Avi & The Groove — five musicians who live for making people dance. Our setlists span decades of hits: from classic rock and Motown to current pop, funk, disco, and Israeli favorites.\n\nWe bring full production — sound, lighting, and the energy of a stadium show. Whether it's a wedding, corporate party, or birthday bash, we guarantee an unforgettable night.\n\nBand lineup: vocals, guitar, bass, keys, drums. Add horns for the premium experience.",
+    packages: [
+      { name: "Party Band", description: "5-piece cover band — non-stop hits and dancing", duration: "3 hours", price: 7000, includes: ["5-piece band", "Full sound system", "LED stage lighting", "3 sets of hits", "Custom song requests", "MC between sets"] },
+      { name: "Wedding Celebration", description: "Complete wedding entertainment from first dance to last song", duration: "5 hours", price: 11000, includes: ["5-piece band", "Full sound & lighting", "First dance performance", "Hora set", "Pop, rock, Israeli hits", "DJ set during breaks", "Wireless mic for speeches"] },
+      { name: "Premium Show", description: "Full band + horn section for the ultimate party", duration: "4 hours", price: 12000, includes: ["7-piece band (add horns)", "Premium sound & lighting", "Choreographed show elements", "All genres covered", "DJ during breaks"] },
+    ],
     highlights: [
-      { icon: "🥁", title: "Join the drum circle", description: "Instruments provided — play along with the band!" },
-      { icon: "🏖️", title: "Beach vibes", description: "Right on the sand at sunset — the perfect Tel Aviv experience." },
+      { icon: "🎸", title: "Every genre covered", description: "Pop, rock, funk, disco, Israeli, Mizrachi — we play it all." },
+      { icon: "🔊", title: "Full production", description: "Professional sound and lighting included — we bring the show." },
+      { icon: "🎷", title: "Add a horn section", description: "Upgrade to a 7-piece with trumpet and saxophone." },
     ],
-    hostName: "Avi",
-    hostImage: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=200&h=200&fit=crop",
-    hostTitle: "Reggae Musician & Community Builder",
-    availableDates: [
-      { date: "Tomorrow, March 19", time: "17:30 – 19:30", spotsLeft: 15 },
-      { date: "Friday, March 21", time: "17:30 – 19:30", spotsLeft: 20 },
-    ],
+    avatar: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=200&h=200&fit=crop",
+    experience: "12 years",
+    languages: ["Hebrew", "English"],
+    eventTypes: ["Weddings", "Corporate Parties", "Birthday Parties", "Bar/Bat Mitzvahs", "Festivals"],
     reviews: [
-      { name: "Tom", location: "Melbourne, Australia", date: "2 days ago", rating: 5, text: "Such a fun and inclusive experience! The band was great and the drum circle was the highlight of my trip.", avatar: "https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=100&h=100&fit=crop" },
+      { name: "Tom S.", location: "Event Planner, Tel Aviv", date: "5 days ago", rating: 5, text: "Avi & The Groove turned a corporate party into a concert. The dance floor was packed from the first song to the last. Best party band in Israel.", avatar: "https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=100&h=100&fit=crop" },
     ],
-    meetingPoint: "Frishman Beach, Tel Aviv",
-    tags: ["Reggae", "Drums", "Beach"],
+    tags: ["Cover Band", "Pop", "Rock", "Weddings", "Parties"],
+    verified: true,
+    responseTime: "Within 1 hour",
+    bookingsCount: 520,
   },
   {
     id: "10",
-    name: "Opera Night in a Caesarea Amphitheater",
-    type: "Opera Singer",
-    genre: "Opera",
-    city: "Caesarea",
+    name: "Marina & Eitan",
+    type: "Opera Duo",
+    genre: "Opera / Classical Vocals",
+    city: "Tel Aviv",
     image: "https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?w=800&h=600&fit=crop",
     images: [
       "https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?w=800&h=600&fit=crop",
@@ -366,30 +391,32 @@ export const musicians: Musician[] = [
     ],
     rating: 4.96,
     reviewCount: 412,
-    pricePerHour: 320,
     currency: "₪",
-    description: "A breathtaking opera performance in the ancient Roman amphitheater of Caesarea.",
-    longDescription: "Experience the power of the human voice in one of the world's most spectacular settings — the 2,000-year-old Roman amphitheater in Caesarea. Soprano Marina and tenor Eitan perform arias from Verdi, Puccini, and Bizet, accompanied by a pianist.\n\nThe ancient acoustics, the Mediterranean breeze, and the star-filled sky create an evening you'll never forget.",
+    bio: "Soprano and tenor duo from the Israeli Opera. Stunning vocal performances for galas, ceremonies, and special celebrations.",
+    longBio: "We are Marina (soprano) and Eitan (tenor), professional opera singers who have performed with the Israeli Opera, the Zurich Opera House, and at festivals worldwide.\n\nWe perform arias, duets, and popular crossover classics accompanied by a pianist. From Puccini to Andrea Bocelli, our performances bring drama, beauty, and emotion to any event.\n\nPerfect for grand entrances, ceremony highlights, gala entertainment, and surprise performances.",
+    packages: [
+      { name: "Vocal Highlight", description: "A show-stopping 30-minute performance for your event's special moment", duration: "30 min", price: 3000, includes: ["Soprano + tenor", "Pianist accompaniment", "3-4 arias/duets", "Grand entrance option"] },
+      { name: "Gala Performance", description: "Full opera program for galas and formal events", duration: "2 hours", price: 6500, includes: ["Soprano + tenor", "Pianist", "Full program of arias, duets & crossover", "2 sets with intermission", "Sound system"] },
+    ],
     highlights: [
-      { icon: "🏛️", title: "2,000-year-old venue", description: "Perform in a Roman amphitheater with legendary acoustics." },
-      { icon: "🎤", title: "World-class vocalists", description: "Marina and Eitan have performed with the Israeli Opera and international companies." },
+      { icon: "🎤", title: "Israeli Opera soloists", description: "Active performers with Israel's national opera company." },
+      { icon: "✨", title: "Wow factor", description: "Perfect for grand entrances, surprise performances, and emotional moments." },
     ],
-    hostName: "Marina",
-    hostImage: "https://images.unsplash.com/photo-1589571894960-20bbe2828d0a?w=200&h=200&fit=crop",
-    hostTitle: "Soprano & Artistic Director",
-    availableDates: [
-      { date: "Saturday, March 22", time: "20:00 – 21:30", spotsLeft: 25 },
-      { date: "Saturday, March 29", time: "20:00 – 21:30", spotsLeft: 30 },
-    ],
+    avatar: "https://images.unsplash.com/photo-1589571894960-20bbe2828d0a?w=200&h=200&fit=crop",
+    experience: "15 years",
+    languages: ["Hebrew", "English", "Italian", "German"],
+    eventTypes: ["Galas", "Corporate Events", "Weddings", "Charity Events", "Special Celebrations"],
     reviews: [
-      { name: "Claire", location: "Lyon, France", date: "1 week ago", rating: 5, text: "Hearing opera in the Caesarea amphitheater was a once-in-a-lifetime experience. Marina's voice gave me chills.", avatar: "https://images.unsplash.com/photo-1500917293891-ef795e70e1f6?w=100&h=100&fit=crop" },
+      { name: "Claire M.", location: "Charity Gala Organizer, Tel Aviv", date: "2 weeks ago", rating: 5, text: "Marina and Eitan performed at our annual charity gala. The room went completely silent during their duet — then erupted in a standing ovation. Worth every shekel.", avatar: "https://images.unsplash.com/photo-1500917293891-ef795e70e1f6?w=100&h=100&fit=crop" },
     ],
-    meetingPoint: "Caesarea National Park, Amphitheater Entrance",
-    tags: ["Opera", "Historic", "Amphitheater"],
+    tags: ["Opera", "Vocals", "Galas", "Classical"],
+    verified: true,
+    responseTime: "Within 4 hours",
+    bookingsCount: 145,
   },
   {
     id: "11",
-    name: "Rock Band Live at Underground Bar",
+    name: "The Voltage",
     type: "Rock Band",
     genre: "Rock",
     city: "Tel Aviv",
@@ -400,33 +427,35 @@ export const musicians: Musician[] = [
     ],
     rating: 4.78,
     reviewCount: 890,
-    pricePerHour: 160,
     currency: "₪",
-    description: "High-energy rock show at one of Tel Aviv's best underground music venues.",
-    longDescription: "Experience Tel Aviv's legendary underground rock scene firsthand. Four-piece band The Voltage plays a high-energy set of original songs and classic covers at a gritty, intimate venue in south Tel Aviv. The bar serves craft beers from local microbreweries.",
+    bio: "High-energy rock band for parties, product launches, and events that need raw energy. Original music and classic rock covers.",
+    longBio: "We're a four-piece rock band — vocals, guitar, bass, and drums — known for electrifying live shows. We play a mix of original music and classic/modern rock covers (Arctic Monkeys, Foo Fighters, Red Hot Chili Peppers, Israeli rock).\n\nOur sound is big, bold, and guaranteed to bring energy to any event. We're perfect for product launches, company parties, music festivals, and celebrations that want something different from the usual band.\n\nFull backline and sound system included.",
+    packages: [
+      { name: "Rock Set", description: "High-energy rock performance", duration: "2 hours", price: 4500, includes: ["4-piece rock band", "Full backline & sound", "Stage lighting", "2 sets of rock hits"] },
+      { name: "Full Night Rock", description: "Complete evening of live rock music", duration: "4 hours", price: 7500, includes: ["4-piece rock band", "Full production (sound + lighting)", "4 sets covering all decades", "DJ between sets", "Custom song requests"] },
+    ],
     highlights: [
-      { icon: "🎸", title: "Raw energy", description: "Up-close rock experience in a venue that holds just 80 people." },
-      { icon: "🍺", title: "Craft beer", description: "Local microbrews on tap to fuel the night." },
+      { icon: "🎸", title: "Raw energy", description: "Bring the energy of a rock concert to your event." },
+      { icon: "🔊", title: "Full production", description: "Backline, PA, and lighting — we bring everything." },
     ],
-    hostName: "Gal",
-    hostImage: "https://images.unsplash.com/photo-1548372290-8d01b6c8e78c?w=200&h=200&fit=crop",
-    hostTitle: "Lead Singer, The Voltage",
-    availableDates: [
-      { date: "Thursday, March 20", time: "22:00 – 00:00", spotsLeft: 20 },
-      { date: "Thursday, March 27", time: "22:00 – 00:00", spotsLeft: 25 },
-    ],
+    avatar: "https://images.unsplash.com/photo-1548372290-8d01b6c8e78c?w=200&h=200&fit=crop",
+    experience: "8 years",
+    languages: ["Hebrew", "English"],
+    eventTypes: ["Product Launches", "Company Parties", "Festivals", "Birthday Parties"],
     reviews: [
-      { name: "Jake", location: "Austin, United States", date: "1 week ago", rating: 5, text: "As someone from Austin, I know good live music — and this was fantastic. Great band, great venue.", avatar: "https://images.unsplash.com/photo-1543610892-0b1f7e6d8ac1?w=100&h=100&fit=crop" },
+      { name: "Jake R.", location: "Marketing Director, Tel Aviv", date: "2 weeks ago", rating: 5, text: "Hired The Voltage for our product launch party. They absolutely killed it — the energy was incredible and our brand got amazing social media coverage from the performance.", avatar: "https://images.unsplash.com/photo-1543610892-0b1f7e6d8ac1?w=100&h=100&fit=crop" },
     ],
-    meetingPoint: "The Bunker, Florentin, Tel Aviv",
-    tags: ["Rock", "Live Band", "Underground"],
+    tags: ["Rock", "Band", "Parties", "Launches"],
+    verified: true,
+    responseTime: "Within 2 hours",
+    bookingsCount: 195,
   },
   {
     id: "12",
-    name: "Violin & Cello Duo in a Wine Cave",
+    name: "Ori & Shira",
     type: "String Duo",
     genre: "Classical",
-    city: "Zichron Ya'akov",
+    city: "Tel Aviv",
     image: "https://images.unsplash.com/photo-1507838153414-b4b713384a76?w=800&h=600&fit=crop",
     images: [
       "https://images.unsplash.com/photo-1507838153414-b4b713384a76?w=800&h=600&fit=crop",
@@ -434,49 +463,48 @@ export const musicians: Musician[] = [
     ],
     rating: 4.93,
     reviewCount: 321,
-    pricePerHour: 250,
     currency: "₪",
-    description: "A violin and cello performance in an actual wine cave, paired with local wines.",
-    longDescription: "Descend into a beautiful wine cave in the historic wine village of Zichron Ya'akov for an intimate classical music experience. Violinist Ori and cellist Shira perform duets by Handel, Ravel, and contemporary Israeli composers, while you sip wines from the estate's own vineyards.\n\nThe cave's natural acoustics create a sound quality that rivals any concert hall.",
+    bio: "Violin and cello duo for wedding ceremonies, cocktail hours, and elegant events. Beautiful classical and contemporary arrangements.",
+    longBio: "We're Ori (violin) and Shira (cello) — a string duo that brings elegance and emotion to events across Israel. Our repertoire spans classical masterpieces (Bach, Pachelbel, Handel) to contemporary arrangements of pop songs, film scores, and Israeli music.\n\nWe specialize in wedding ceremonies — from the processional to the first dance. We also perform at cocktail hours, corporate receptions, and art gallery openings.\n\nWe can expand to a string quartet for larger events.",
+    packages: [
+      { name: "Ceremony Duo", description: "Violin & cello for wedding ceremonies and special moments", duration: "1 hour", price: 2200, includes: ["Violin + cello duo", "Processional & recessional", "Custom song arrangement (1 song)", "Background music"] },
+      { name: "Elegant Reception", description: "String duo for cocktail hours and receptions", duration: "3 hours", price: 4000, includes: ["Violin + cello duo", "Classical & pop arrangements", "3 sets", "Amplification if needed"] },
+      { name: "String Quartet", description: "Full quartet for a richer, grander sound", duration: "3 hours", price: 7000, includes: ["String quartet (2 violins, viola, cello)", "Full classical & contemporary repertoire", "Custom arrangements available", "Sound amplification"] },
+    ],
     highlights: [
-      { icon: "🍷", title: "Wine tasting included", description: "Three wines from the estate paired with the music." },
-      { icon: "🕯️", title: "Candlelit cave", description: "A magical atmosphere in a centuries-old wine cave." },
+      { icon: "🎻", title: "Custom arrangements", description: "We arrange pop songs and personal favorites for strings." },
+      { icon: "💒", title: "Wedding specialists", description: "Over 200 weddings performed — we know every moment that matters." },
     ],
-    hostName: "Ori",
-    hostImage: "https://images.unsplash.com/photo-1513956589380-bad6acb9b9d4?w=200&h=200&fit=crop",
-    hostTitle: "Violinist & Musical Director",
-    availableDates: [
-      { date: "Saturday, March 22", time: "19:00 – 20:30", spotsLeft: 2 },
-      { date: "Saturday, March 29", time: "19:00 – 20:30", spotsLeft: 5 },
-    ],
+    avatar: "https://images.unsplash.com/photo-1513956589380-bad6acb9b9d4?w=200&h=200&fit=crop",
+    experience: "10 years",
+    languages: ["Hebrew", "English"],
+    eventTypes: ["Wedding Ceremonies", "Cocktail Hours", "Corporate Receptions", "Art Events", "Formal Dinners"],
     reviews: [
-      { name: "Pierre", location: "Bordeaux, France", date: "6 days ago", rating: 5, text: "Music and wine in a cave — it sounds like a dream and it was. The acoustics were phenomenal.", avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop" },
+      { name: "Pierre D.", location: "Wedding Planner, Tel Aviv", date: "1 week ago", rating: 5, text: "Ori and Shira played at a rooftop wedding ceremony. Their arrangement of the couple's song had everyone in tears. Pure magic.", avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop" },
     ],
-    meetingPoint: "Wine Estate, Zichron Ya'akov",
-    tags: ["Classical", "Wine", "String Duo"],
-    spotsLabel: "2 spots left",
+    tags: ["Strings", "Classical", "Weddings", "Duo"],
+    verified: true,
+    responseTime: "Within 2 hours",
+    bookingsCount: 230,
   },
 ];
 
-export const cities = ["Tel Aviv", "Jerusalem", "Haifa", "Eilat", "Tiberias", "Caesarea", "Zichron Ya'akov"];
-export const genres = ["Jazz", "Classical", "Middle Eastern", "Electronic", "Folk", "Klezmer", "Flamenco", "Reggae", "Opera", "Rock"];
-
-export function getMusiciansByCity(city: string): Musician[] {
-  return musicians.filter((m) => m.city === city);
-}
-
-export function getMusiciansByGenre(genre: string): Musician[] {
-  return musicians.filter((m) => m.genre === genre);
-}
+export const cities = ["Tel Aviv", "Jerusalem", "Haifa", "Eilat"];
+export const genres = ["Jazz", "Classical", "Middle Eastern", "Electronic", "Folk / Pop", "Klezmer", "Flamenco", "Pop / Rock", "Opera / Classical Vocals", "Rock"];
+export const eventTypes = ["Weddings", "Corporate Events", "Private Parties", "Bar/Bat Mitzvahs", "Galas", "Product Launches", "Festivals"];
 
 export function getMusicianById(id: string): Musician | undefined {
   return musicians.find((m) => m.id === id);
 }
 
-export function getFeaturedMusicians(): Musician[] {
-  return musicians.filter((m) => m.rating >= 4.9).slice(0, 7);
+export function getTopRated(): Musician[] {
+  return [...musicians].sort((a, b) => b.rating - a.rating).slice(0, 8);
 }
 
-export function getPopularInCity(city: string): Musician[] {
-  return musicians.filter((m) => m.city === city).sort((a, b) => b.reviewCount - a.reviewCount);
+export function getMostBooked(): Musician[] {
+  return [...musicians].sort((a, b) => (b.bookingsCount || 0) - (a.bookingsCount || 0)).slice(0, 8);
+}
+
+export function getByEventType(eventType: string): Musician[] {
+  return musicians.filter((m) => m.eventTypes.some((e) => e.toLowerCase().includes(eventType.toLowerCase())));
 }
